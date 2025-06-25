@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ипотека с господдержкой</title>
+  <style>
+    body {font-family: Arial, sans-serif; margin: 0; padding: 0; line-height: 1.6;}
+    header, main {padding: 20px;}
+    header {background: #f4f4f4;}
+    section {margin-bottom: 30px;}
+    form input, form button {display: block; margin: 10px 0; padding: 8px; width: 100%; max-width: 400px;}
+    .calculator input {width: 100%; max-width: 200px;}
+    .result {font-weight: bold;}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Ипотека с господдержкой</h1>
+  </header>
+  <main>
+    <section id="conditions">
+      <h2>Условия акции</h2>
+      <p>Получите льготную ипотеку с поддержкой государства. Ставка от 6% годовых. Сумма кредита — до 8 млн рублей, срок — до 30 лет. Первый взнос — от 15% стоимости жилья.</p>
+    </section>
+    <section id="benefits">
+      <h2>Выгоды для клиента</h2>
+      <ul>
+        <li>Сниженная процентная ставка по сравнению с обычной ипотекой.</li>
+        <li>Возможность выбрать удобный срок кредитования.</li>
+        <li>Минимальный первый взнос — всего 15%.</li>
+      </ul>
+    </section>
+    <section id="application">
+      <h2>Оставьте заявку</h2>
+      <form id="requestForm">
+        <input type="text" name="name" placeholder="Ваше имя" required>
+        <input type="tel" name="phone" placeholder="Телефон" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <button type="submit">Отправить</button>
+      </form>
+    </section>
+    <section id="calculator" class="calculator">
+      <h2>Калькулятор ипотеки</h2>
+      <label>Сумма кредита (₽): <input type="number" id="amount" value="3000000"></label><br>
+      <label>Срок (лет): <input type="number" id="term" value="20"></label><br>
+      <label>Ставка (% годовых): <input type="number" id="rate" value="6"></label><br>
+      <label>Первый взнос (₽): <input type="number" id="down" value="450000"></label><br>
+      <button id="calcBtn">Рассчитать</button>
+      <p class="result">Ежемесячный платеж: <span id="payment">-</span> ₽</p>
+    </section>
+  </main>
+  <script>
+    document.getElementById('calcBtn').addEventListener('click', function() {
+      const amount = parseFloat(document.getElementById('amount').value) - parseFloat(document.getElementById('down').value);
+      const years = parseFloat(document.getElementById('term').value);
+      const months = years * 12;
+      const rate = parseFloat(document.getElementById('rate').value) / 100 / 12;
+      const payment = (amount * rate) / (1 - Math.pow(1 + rate, -months));
+      document.getElementById('payment').textContent = payment ? payment.toFixed(2) : '-';
+    });
+  </script>
+</body>
+</html>
