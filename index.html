@@ -5,13 +5,53 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ипотека с господдержкой</title>
   <style>
-    body {font-family: Arial, sans-serif; margin: 0; padding: 0; line-height: 1.6;}
-    header, main {padding: 20px;}
-    header {background: #f4f4f4;}
-    section {margin-bottom: 30px;}
-    form input, form button {display: block; margin: 10px 0; padding: 8px; width: 100%; max-width: 400px;}
-    .calculator input {width: 100%; max-width: 200px;}
-    .result {font-weight: bold;}
+    :root {
+      --sber-green: #21A038;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+      background: #f7f7f7;
+      color: #333;
+    }
+    header,
+    main {
+      padding: 20px;
+    }
+    header {
+      background: var(--sber-green);
+      color: #fff;
+    }
+    section {
+      margin-bottom: 30px;
+    }
+    form input,
+    form button {
+      display: block;
+      margin: 10px 0;
+      padding: 8px;
+      width: 100%;
+      max-width: 400px;
+      border-radius: 4px;
+    }
+    form input {
+      border: 1px solid #ccc;
+    }
+    form button {
+      background: var(--sber-green);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+    .calculator input {
+      width: 100%;
+      max-width: 200px;
+    }
+    .result {
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
