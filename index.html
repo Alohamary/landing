@@ -4,46 +4,72 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ипотека с господдержкой</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --sber-green: #21A038;
     }
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
       margin: 0;
       background: #fff;
       color: #333;
+      color: #1D1D1D;
       line-height: 1.5;
     }
     header.hero {
       text-align: center;
       padding: 60px 20px;
+      padding: 80px 20px;
+      background: linear-gradient(135deg, #e9f7ef, #fff);
     }
     header.hero h1 {
       color: var(--sber-green);
       font-size: 2.2rem;
+      font-size: 2.5rem;
+      font-weight: 700;
       margin-bottom: 20px;
     }
     header.hero p {
       font-size: 1.2rem;
       margin-bottom: 30px;
     }
+    h2 {
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+    p { font-size: 16px; }
     .button {
       background: var(--sber-green);
       color: #fff;
       padding: 12px 24px;
       border: none;
       border-radius: 4px;
+      border: 2px solid #fff;
+      border-radius: 8px;
       cursor: pointer;
       font-size: 1rem;
+      font-weight: 600;
+      transition: background .2s, box-shadow .2s;
+    }
+    .button:hover {
+      background: #19922f;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
     .container {
       width: 90%;
       max-width: 960px;
+      width: 100%;
+      max-width: 1200px;
       margin: 0 auto;
+      padding: 0 16px;
     }
     section {
       margin: 60px 0;
+      margin: 64px 0;
     }
     ul {
       padding-left: 20px;
@@ -56,22 +82,33 @@
       max-width: 400px;
       margin-bottom: 12px;
       padding: 10px;
+      margin-bottom: 16px;
+      padding: 12px;
       box-sizing: border-box;
+      font-size: 1rem;
     }
     form input {
       border: 1px solid #ccc;
       border-radius: 4px;
+      border: 1px solid #DDE1E6;
+      border-radius: 8px;
+    }
+    form input::placeholder {
+      color: #A1A7B2;
     }
     form button {
       background: var(--sber-green);
       color: #fff;
       border: none;
       border-radius: 4px;
+      border-radius: 8px;
       cursor: pointer;
+      font-weight: 600;
     }
     .calculator label {
       display: block;
       margin-bottom: 10px;
+      margin-bottom: 12px;
     }
     .calculator input {
       max-width: 200px;
@@ -80,32 +117,74 @@
     .result {
       font-weight: bold;
       margin-top: 10px;
+      font-weight: 600;
+      margin-top: 12px;
     }
     .accordion {
       width: 100%;
       text-align: left;
       padding: 10px;
       background: #f6f6f6;
+      padding: 12px 16px;
+      background: #F9FAFB;
       border: none;
+      border-radius: 8px;
       cursor: pointer;
       margin-bottom: 5px;
+      margin-bottom: 8px;
+      position: relative;
+    }
+    .accordion::after {
+      content: '+';
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-weight: 600;
+    }
+    .accordion[aria-expanded="true"]::after {
+      content: '−';
     }
     .accordion-content {
+      display: none;
       padding: 0 10px 10px;
+      padding: 0 16px 16px;
       color: #555;
     }
     .accordion-content[hidden] { display: none; }
     .logo { vertical-align: middle; margin-right: 8px; }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 24px;
+    }
+    .card {
+      background: #F9FAFB;
+      border-radius: 12px;
+      padding: 24px;
+    }
+    .footer-cols {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      justify-content: space-between;
+    }
     footer {
       background: #f6f6f6;
+      background: #F9FAFB;
       text-align: center;
       padding: 20px;
+      padding: 40px 16px;
       font-size: 0.9rem;
       color: #555;
+      color: #4B4B4B;
     }
+    footer a:hover { text-decoration: underline; }
     @media (max-width: 600px) {
       header.hero h1 { font-size: 1.7rem; }
       header.hero p { font-size: 1rem; }
+      .cards { grid-template-columns: 1fr; }
+      .footer-cols { flex-direction: column; text-align: center; }
     }
   </style>
 </head>
@@ -114,6 +193,7 @@
     <h1>Ипотека с господдержкой от 5,5%</h1>
     <p>Покупайте жильё на выгодных условиях — ставка от 5,5%, срок до 30 лет</p>
     <button class="button" onclick="document.getElementById('form').scrollIntoView({behavior:'smooth'})">Оформить заявку</button>
+    <button class="button" onclick="document.getElementById('calculator').scrollIntoView({behavior:'smooth'})">Оформить заявку</button>
   </header>
   <main class="container">
     <section id="conditions">
@@ -125,6 +205,13 @@
         <li>Первый взнос от 15%</li>
         <li>Господдержка сохраняется на весь срок</li>
       </ul>
+      <div class="cards">
+        <div class="card">Ставка от 5,5%</div>
+        <div class="card">Сумма кредита до 6 млн ₽</div>
+        <div class="card">Срок до 30 лет</div>
+        <div class="card">Первый взнос от 15%</div>
+        <div class="card">Господдержка сохраняется на весь срок</div>
+      </div>
     </section>
     <section id="benefits">
       <h2>Выгоды для клиента</h2>
@@ -134,8 +221,15 @@
         <li>Быстрое одобрение</li>
         <li>Заявка онлайн без визита в офис</li>
       </ul>
+      <div class="cards">
+        <div class="card">Упрощённое оформление</div>
+        <div class="card">Электронная регистрация</div>
+        <div class="card">Быстрое одобрение</div>
+        <div class="card">Заявка онлайн без визита в офис</div>
+      </div>
     </section>
     <section id="calculator" class="calculator">
+    <section id="calculator" class="card calculator">
       <h2>Ипотечный калькулятор</h2>
       <label>Сумма кредита (₽)
         <input type="number" id="amount" value="3000000">
@@ -155,6 +249,7 @@
       <h2>Оформить заявку</h2>
       <form id="applyForm" novalidate>
         <input type="text" name="name" placeholder="Имя" required>
+        <input type="tel" name="phone" placeholder="Телефон" required>
         <input type="tel" name="phone" placeholder="Телефон" required pattern="\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}">
         <input type="email" name="email" placeholder="Email" required>
         <label><input type="checkbox" id="consent" required> Я согласен на обработку персональных данных</label>
@@ -163,6 +258,12 @@
     </section>
     <section id="faq">
       <h2>FAQ</h2>
+      <button class="accordion">Кто может получить господдержку?</button>
+      <div class="accordion-content"><p>Программа доступна гражданам РФ, покупающим жильё в новостройке.</p></div>
+      <button class="accordion">Как оформить заявку?</button>
+      <div class="accordion-content"><p>Заполните форму на сайте и дождитесь звонка специалиста.</p></div>
+      <button class="accordion">Когда вносить первый взнос?</button>
+      <div class="accordion-content"><p>Первый взнос уплачивается при подписании кредитного договора.</p></div>
       <button class="accordion" aria-controls="faq1" aria-expanded="false">Кто может получить господдержку?</button>
       <div id="faq1" class="accordion-content" hidden><p>Программа доступна гражданам РФ, покупающим жильё в новостройке.</p></div>
       <button class="accordion" aria-controls="faq2" aria-expanded="false">Как оформить заявку?</button>
@@ -172,16 +273,28 @@
     </section>
   </main>
   <footer>
-    <p>
-      <svg class="logo" width="24" height="24" viewBox="0 0 24 24" aria-labelledby="logoTitle" role="img">
-        <title id="logoTitle">Логотип Сбера</title>
-        <circle cx="12" cy="12" r="12" fill="#21A038"/>
-        <path d="M6 12l3 3 9-9" stroke="#fff" stroke-width="2" fill="none"/>
-      </svg>
-      <strong>Сбер</strong>
-    </p>
+    <p><strong>Сбер</strong></p>
     <p>8&nbsp;800&nbsp;555‑55‑50</p>
     <a href="#">Документы и условия</a>
+    <div class="footer-cols">
+      <div>
+        <p>
+          <svg class="logo" width="24" height="24" viewBox="0 0 24 24" aria-labelledby="logoTitle" role="img">
+            <title id="logoTitle">Логотип Сбера</title>
+            <circle cx="12" cy="12" r="12" fill="#21A038"/>
+            <path d="M6 12l3 3 9-9" stroke="#fff" stroke-width="2" fill="none"/>
+          </svg>
+          <strong>Сбер</strong>
+        </p>
+        <p>8&nbsp;800&nbsp;555‑55‑50</p>
+      </div>
+      <div>
+        <a href="#">Документы и условия</a>
+      </div>
+      <div>
+        <a href="#">Политика конфиденциальности</a>
+      </div>
+    </div>
   </footer>
   <script>
     const fields = ['amount','term','rate','down'];
@@ -226,6 +339,8 @@
       btn.setAttribute('aria-expanded','false');
       content.hidden = true;
       btn.addEventListener('click', () => {
+        const content = btn.nextElementSibling;
+        content.style.display = content.style.display === 'block' ? 'none' : 'block';
         const expanded = btn.getAttribute('aria-expanded') === 'true';
         btn.setAttribute('aria-expanded', !expanded);
         content.hidden = expanded;
