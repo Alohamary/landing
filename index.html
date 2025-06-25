@@ -9,50 +9,64 @@
       --sber-green: #21A038;
     }
     body {
-      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
       margin: 0;
-      padding: 0;
       background: #fff;
       color: #333;
       line-height: 1.5;
     }
+    header.hero {
+      text-align: center;
+      padding: 60px 20px;
+    }
+    header.hero h1 {
+      color: var(--sber-green);
+      font-size: 2.2rem;
+      margin-bottom: 20px;
+    }
+    header.hero p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+    }
+    .button {
+      background: var(--sber-green);
+      color: #fff;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
     .container {
+      width: 90%;
       max-width: 960px;
       margin: 0 auto;
-      padding: 40px 20px;
-    }
-    h1 {
-      color: var(--sber-green);
-      margin-bottom: 30px;
-      font-size: 2rem;
-    }
-    h2 {
-      margin-bottom: 15px;
-      font-size: 1.5rem;
-    }
-    p {
-      color: #555;
     }
     section {
-      margin-bottom: 40px;
+      margin: 60px 0;
+    }
+    ul {
+      padding-left: 20px;
     }
     form input,
+    form label,
     form button {
       display: block;
       width: 100%;
       max-width: 400px;
-      padding: 10px 12px;
       margin-bottom: 12px;
-      border-radius: 4px;
+      padding: 10px;
       box-sizing: border-box;
     }
     form input {
       border: 1px solid #ccc;
+      border-radius: 4px;
     }
     form button {
       background: var(--sber-green);
       color: #fff;
       border: none;
+      border-radius: 4px;
       cursor: pointer;
     }
     .calculator label {
@@ -61,59 +75,137 @@
     }
     .calculator input {
       max-width: 200px;
+      width: 100%;
     }
     .result {
       font-weight: bold;
       margin-top: 10px;
     }
+    .accordion {
+      width: 100%;
+      text-align: left;
+      padding: 10px;
+      background: #f6f6f6;
+      border: none;
+      cursor: pointer;
+      margin-bottom: 5px;
+    }
+    .accordion-content {
+      display: none;
+      padding: 0 10px 10px;
+      color: #555;
+    }
+    footer {
+      background: #f6f6f6;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+      color: #555;
+    }
+    @media (max-width: 600px) {
+      header.hero h1 { font-size: 1.7rem; }
+      header.hero p { font-size: 1rem; }
+    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>Ипотека с господдержкой</h1>
-    </header>
-    <main>
-      <section id="conditions">
-        <h2>Условия акции</h2>
-        <p>Процентная ставка от 6% годовых. Сумма кредита&nbsp;&mdash; до 8&nbsp;млн&nbsp;₽, срок&nbsp;&mdash; до 30&nbsp;лет. Минимальный первоначальный взнос&nbsp;&mdash; 15% стоимости жилья.</p>
-      </section>
-      <section id="benefits">
-        <h2>Преимущества</h2>
-        <ul>
-          <li>Сниженная процентная ставка благодаря государственной поддержке.</li>
-          <li>Возможность выбрать оптимальный срок кредита.</li>
-          <li>Минимальный первый взнос&nbsp;&mdash; 15%.</li>
-        </ul>
-      </section>
-      <section id="application">
-        <h2>Оставьте заявку</h2>
-        <form id="requestForm">
-          <input type="text" name="name" placeholder="Ваше имя" required>
-          <input type="tel" name="phone" placeholder="Телефон" required>
-          <input type="email" name="email" placeholder="Email" required>
-          <button type="submit">Отправить</button>
-        </form>
-      </section>
-      <section id="calculator" class="calculator">
-        <h2>Калькулятор ипотеки</h2>
-        <label>Сумма кредита (₽): <input type="number" id="amount" value="3000000"></label>
-        <label>Срок (лет): <input type="number" id="term" value="20"></label>
-        <label>Ставка (%): <input type="number" id="rate" value="6"></label>
-        <label>Первый взнос (₽): <input type="number" id="down" value="450000"></label>
-        <button id="calcBtn" type="button">Рассчитать</button>
-        <p class="result">Ежемесячный платеж: <span id="payment">-</span> ₽</p>
-      </section>
-    </main>
-  </div>
+  <header class="hero">
+    <h1>Ипотека с господдержкой от 5,5%</h1>
+    <p>Покупайте жильё на выгодных условиях — ставка от 5,5%, срок до 30 лет</p>
+    <button class="button" onclick="document.getElementById('form').scrollIntoView({behavior:'smooth'})">Оформить заявку</button>
+  </header>
+  <main class="container">
+    <section id="conditions">
+      <h2>Условия</h2>
+      <ul>
+        <li>Ставка от 5,5%</li>
+        <li>Сумма кредита до 6 млн ₽</li>
+        <li>Срок до 30 лет</li>
+        <li>Первый взнос от 15%</li>
+        <li>Господдержка сохраняется на весь срок</li>
+      </ul>
+    </section>
+    <section id="benefits">
+      <h2>Выгоды для клиента</h2>
+      <ul>
+        <li>Упрощённое оформление</li>
+        <li>Электронная регистрация</li>
+        <li>Быстрое одобрение</li>
+        <li>Заявка онлайн без визита в офис</li>
+      </ul>
+    </section>
+    <section id="calculator" class="calculator">
+      <h2>Ипотечный калькулятор</h2>
+      <label>Сумма кредита (₽)
+        <input type="number" id="amount" value="3000000">
+      </label>
+      <label>Срок (лет)
+        <input type="number" id="term" value="20">
+      </label>
+      <label>Ставка (%)
+        <input type="number" id="rate" value="5.5" step="0.1">
+      </label>
+      <label>Первый взнос (₽)
+        <input type="number" id="down" value="450000">
+      </label>
+      <p class="result">Ежемесячный платёж: <span id="payment">-</span> ₽</p>
+    </section>
+    <section id="form">
+      <h2>Оформить заявку</h2>
+      <form id="applyForm" novalidate>
+        <input type="text" name="name" placeholder="Имя" required>
+        <input type="tel" name="phone" placeholder="Телефон" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <label><input type="checkbox" id="consent" required> Я согласен на обработку персональных данных</label>
+        <button type="submit" class="button">Отправить</button>
+      </form>
+    </section>
+    <section id="faq">
+      <h2>FAQ</h2>
+      <button class="accordion">Кто может получить господдержку?</button>
+      <div class="accordion-content"><p>Программа доступна гражданам РФ, покупающим жильё в новостройке.</p></div>
+      <button class="accordion">Как оформить заявку?</button>
+      <div class="accordion-content"><p>Заполните форму на сайте и дождитесь звонка специалиста.</p></div>
+      <button class="accordion">Когда вносить первый взнос?</button>
+      <div class="accordion-content"><p>Первый взнос уплачивается при подписании кредитного договора.</p></div>
+    </section>
+  </main>
+  <footer>
+    <p><strong>Сбер</strong></p>
+    <p>8&nbsp;800&nbsp;555‑55‑50</p>
+    <a href="#">Документы и условия</a>
+  </footer>
   <script>
-    document.getElementById('calcBtn').addEventListener('click', function () {
+    const fields = ['amount','term','rate','down'];
+    fields.forEach(id => document.getElementById(id).addEventListener('input', calc));
+    function calc(){
       const amount = parseFloat(document.getElementById('amount').value) - parseFloat(document.getElementById('down').value);
-      const years = parseFloat(document.getElementById('term').value);
-      const months = years * 12;
+      const months = parseFloat(document.getElementById('term').value) * 12;
       const monthlyRate = parseFloat(document.getElementById('rate').value) / 100 / 12;
-      const payment = (amount * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -months));
-      document.getElementById('payment').textContent = payment ? payment.toFixed(2) : '-';
+      if(amount>0 && months>0 && monthlyRate>0){
+        const payment = (amount * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -months));
+        document.getElementById('payment').textContent = payment.toFixed(2);
+      } else {
+        document.getElementById('payment').textContent = '-';
+      }
+    }
+    calc();
+
+    document.getElementById('applyForm').addEventListener('submit', function(e){
+      if(!this.checkValidity()){
+        e.preventDefault();
+        return;
+      }
+      e.preventDefault();
+      alert('Заявка отправлена');
+      this.reset();
+    });
+
+    document.querySelectorAll('.accordion').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const content = btn.nextElementSibling;
+        content.style.display = content.style.display === 'block' ? 'none' : 'block';
+      });
     });
   </script>
 </body>
