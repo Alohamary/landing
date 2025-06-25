@@ -91,10 +91,11 @@
       margin-bottom: 5px;
     }
     .accordion-content {
-      display: none;
       padding: 0 10px 10px;
       color: #555;
     }
+    .accordion-content[hidden] { display: none; }
+    .logo { vertical-align: middle; margin-right: 8px; }
     footer {
       background: #f6f6f6;
       text-align: center;
@@ -154,7 +155,7 @@
       <h2>Оформить заявку</h2>
       <form id="applyForm" novalidate>
         <input type="text" name="name" placeholder="Имя" required>
-        <input type="tel" name="phone" placeholder="Телефон" required>
+        <input type="tel" name="phone" placeholder="Телефон" required pattern="\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}">
         <input type="email" name="email" placeholder="Email" required>
         <label><input type="checkbox" id="consent" required> Я согласен на обработку персональных данных</label>
         <button type="submit" class="button">Отправить</button>
@@ -162,16 +163,23 @@
     </section>
     <section id="faq">
       <h2>FAQ</h2>
-      <button class="accordion">Кто может получить господдержку?</button>
-      <div class="accordion-content"><p>Программа доступна гражданам РФ, покупающим жильё в новостройке.</p></div>
-      <button class="accordion">Как оформить заявку?</button>
-      <div class="accordion-content"><p>Заполните форму на сайте и дождитесь звонка специалиста.</p></div>
-      <button class="accordion">Когда вносить первый взнос?</button>
-      <div class="accordion-content"><p>Первый взнос уплачивается при подписании кредитного договора.</p></div>
+      <button class="accordion" aria-controls="faq1" aria-expanded="false">Кто может получить господдержку?</button>
+      <div id="faq1" class="accordion-content" hidden><p>Программа доступна гражданам РФ, покупающим жильё в новостройке.</p></div>
+      <button class="accordion" aria-controls="faq2" aria-expanded="false">Как оформить заявку?</button>
+      <div id="faq2" class="accordion-content" hidden><p>Заполните форму на сайте и дождитесь звонка специалиста.</p></div>
+      <button class="accordion" aria-controls="faq3" aria-expanded="false">Когда вносить первый взнос?</button>
+      <div id="faq3" class="accordion-content" hidden><p>Первый взнос уплачивается при подписании кредитного договора.</p></div>
     </section>
   </main>
   <footer>
-    <p><strong>Сбер</strong></p>
+    <p>
+      <svg class="logo" width="24" height="24" viewBox="0 0 24 24" aria-labelledby="logoTitle" role="img">
+        <title id="logoTitle">Логотип Сбера</title>
+        <circle cx="12" cy="12" r="12" fill="#21A038"/>
+        <path d="M6 12l3 3 9-9" stroke="#fff" stroke-width="2" fill="none"/>
+      </svg>
+      <strong>Сбер</strong>
+    </p>
     <p>8&nbsp;800&nbsp;555‑55‑50</p>
     <a href="#">Документы и условия</a>
   </footer>
@@ -201,10 +209,26 @@
       this.reset();
     });
 
+    const phoneInput = document.querySelector('input[name="phone"]');
+    phoneInput.addEventListener('input', maskPhone);
+    function maskPhone(e){
+      let x = e.target.value.replace(/\D/g,'').replace(/^8/, '').slice(0,10);
+      let formatted = '+7';
+      if(x.length>0) formatted += ' ('+x.substring(0,3);
+      if(x.length>=3) formatted += ') '+x.substring(3,6);
+      if(x.length>=6) formatted += '-'+x.substring(6,8);
+      if(x.length>=8) formatted += '-'+x.substring(8,10);
+      e.target.value = formatted;
+    }
+
     document.querySelectorAll('.accordion').forEach(btn => {
+      const content = btn.nextElementSibling;
+      btn.setAttribute('aria-expanded','false');
+      content.hidden = true;
       btn.addEventListener('click', () => {
-        const content = btn.nextElementSibling;
-        content.style.display = content.style.display === 'block' ? 'none' : 'block';
+        const expanded = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', !expanded);
+        content.hidden = expanded;
       });
     });
   </script>
